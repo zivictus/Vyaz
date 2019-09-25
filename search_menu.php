@@ -40,7 +40,7 @@
 		$publisherName_select_result = mysqli_query($link, $publisherName_select);
 		$publisherName_rows = mysqli_num_rows($publisherName_select_result);
 		
-		$genreName_select ="SELECT Id,Name FROM Id,Genre ORDER BY Name";
+		$genreName_select ="SELECT Id,Name FROM Genre ORDER BY Name";
 		$genreName_select_result = mysqli_query($link, $genreName_select);
 		$genreName_rows = mysqli_num_rows($genreName_select_result);
 		
@@ -146,6 +146,19 @@
 						?>	
 						</select>						
 						<input type="submit" value="Поиск" formnovalidate formaction="search_game_by_publisher.php"><p>	
+						
+						<h3>Поиск по двум аттрибутам</h3>
+						<label for="genreName">Жанр</label>
+						<select name="genreName" required>							
+						<?php 
+							for ($i = 0 ; $i < $genreName_rows ; ++$i)
+							{
+								$fetched_row = mysqli_fetch_row($genreName_select_result);
+								echo "<option value=\"$fetched_row[0]\">$fetched_row[1]</option>";
+							} 
+						?>	
+						</select>						
+						<input type="submit" value="Далее" formnovalidate formaction="search_game_by_attributes.php"><p>
 						
 					</form>
 				</div>
